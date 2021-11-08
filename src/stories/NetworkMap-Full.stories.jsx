@@ -15,7 +15,16 @@ export default {
 
 
 
-export function BasicNetworkMap({ dimension, rootName, initialDepth, initialLinkColor, dataFlat }) {
+export function FullNetworkMap({
+  dimension,
+  rootName,
+  initialDepth,
+  initialLinkColor,
+  dataFlat,
+  isTree,
+  rootCircleRadius,
+  normalCircleRadius,
+}) {
   const keys = Object.keys(dataFlat[0]);
   const hKeys = keys.filter(d => d.indexOf('node') != -1)
     .filter((d, i, arr) => i != arr.length - 1);
@@ -37,23 +46,72 @@ export function BasicNetworkMap({ dimension, rootName, initialDepth, initialLink
       svgHeight={dimension}
       initialLinkColor={initialLinkColor}
       initialDepth={initialDepth}
+      normalCircleRadius={normalCircleRadius}
+      rootCircleRadius={rootCircleRadius}
+      isTree={isTree}
       data={data}
 
     />
   );
 }
 
-BasicNetworkMap.story = {
-  name: 'Basic Network Map',
+FullNetworkMap.story = {
+  name: 'Full Network Map',
 }
 
-BasicNetworkMap.args = {
+FullNetworkMap.args = {
   dimension: 800,
   initialLinkColor: '#688487',
-  dataFlat: dataFlat,
   initialDepth: 1,
   rootName: 'Agritech',
+  isTree: false,
+  rootCircleRadius: 50,
+  normalCircleRadius: 33,
+  dataFlat: dataFlat,
 }
+
+FullNetworkMap.argTypes = {
+  dimension: {
+    description: `Sets chart dimension`,
+    defaultValue: { summary: `800` },
+  },
+  initialLinkColor: {
+    description: `Sets Initial link color`,
+    defaultValue: { summary: `#688487` },
+  },
+  initialDepth: {
+    description: `Sets initial depth, for which nodes expand`,
+    defaultValue: { summary: `1` },
+  },
+  rootName: {
+    description: `Sets root node name`,
+    defaultValue: { summary: 'root' },
+  },
+  isTree: {
+    description: `Sets whether layout should follow tree pattern or not`,
+    defaultValue: { summary: `false` },
+  },
+  rootCircleRadius: {
+    description: 'Sets root circle radiuses',
+    defaultValue: { summary: `50` },
+  },
+  normalCircleRadius: {
+    description: 'Sets normal circle radiuses',
+    defaultValue: { summary: `33` },
+  },
+
+};
+
+
+
+
+
+
+
+
+
+
+
 
 
 

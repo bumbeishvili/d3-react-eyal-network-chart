@@ -28,7 +28,7 @@ export class NetworkMapComponent extends React.Component {
                 className="d3-network-map d3-chart-container"
             >
                 <div ref={(node) => (this.node = node)} />
-                Test
+
             </div>
         )
     }
@@ -56,7 +56,7 @@ export class NetworkMapComponent extends React.Component {
         // Pass chart some parameters and (re)render it
         this.chart
             .container(node)
-            .data(props.data)
+            .data(props.data, props.initialDepth || 1)
 
         if (props.svgHeight !== undefined) {
             this.chart.svgHeight(props.svgHeight)
@@ -77,6 +77,21 @@ export class NetworkMapComponent extends React.Component {
         if (props.marginLeft !== undefined) {
             this.chart.marginLeft(props.marginLeft)
         }
+        if (props.normalCircleRadius !== undefined) {
+            this.chart.normalCircleRadius(props.normalCircleRadius)
+        }
+
+        if (props.rootCircleRadius !== undefined) {
+            this.chart.rootCircleRadius(props.rootCircleRadius)
+        }
+        if (props.initialLinkColor !== undefined) {
+            this.chart.initialLinkColor(props.initialLinkColor)
+        }
+
+        if (props.isTree !== undefined) {
+            this.chart.isTree(props.isTree)
+        }
+
 
         this.chart
             .render();
